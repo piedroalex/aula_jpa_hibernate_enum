@@ -1,19 +1,26 @@
 package principal;
 
-import dao.ContaDAO;
-import entities.Conta;
+import dao.ContaAcessoDAO;
+import entities.ContaAcesso;
 import enums.Status;
 
+/**
+ * @author Pedro Alex
+ */
 public class Principal {
 	
 	public static void main(String[] args) {
-		ContaDAO contaDAO = new ContaDAO();
+		ContaAcessoDAO contaAcessoDAO = new ContaAcessoDAO();
 		
-		Conta conta = new Conta();
-		conta.setLogin("meulogin");
-		conta.setStatus(Status.ATIVO);
+		ContaAcesso contaAcesso = new ContaAcesso();
+		contaAcesso.setLogin("meulogin");
+		contaAcesso.setStatus(Status.ATIVO);
 		
-		contaDAO.salvar(conta);
+		contaAcessoDAO.salvar(contaAcesso);
 		
+		contaAcesso = contaAcessoDAO.buscarPorLogin("meulogin");
+		contaAcesso.setStatus(Status.INATIVO);
+
+		contaAcessoDAO.atualizar(contaAcesso);
 	}
 }
